@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 
 @Component({
   selector: 'app-header',
@@ -6,5 +6,11 @@ import {Component} from "@angular/core";
   }
 )
 export class HeaderComponent{
+
+  @Output() selectedTap = new EventEmitter<string>();
+
+  tap(tap:string){
+    this.selectedTap.emit(tap);
+  }
 
 }
