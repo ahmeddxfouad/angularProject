@@ -7,11 +7,4 @@ import {Component, Input} from '@angular/core';
 })
 export class AppComponent {
 
-  @Input() selected: string= "recipe";
-
-
-  changeTap(event: string){
-    this.selected=event;
-  }
-
 }

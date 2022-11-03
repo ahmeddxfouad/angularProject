@@ -1,9 +1,12 @@
 import {Recipe} from "./recipe.model";
-import {EventEmitter} from "@angular/core";
 import {Ingredient} from "../shared/ingredient.module";
+import {Subject} from "rxjs";
+
 
 export class RecipeService {
-  recipeSelected = new EventEmitter<Recipe>();
+
+  recipesChanged = new Subject<Recipe[]>();
+
 
   private recipes: Recipe[] = [
     new Recipe('Mes23a',
@@ -31,5 +34,20 @@ export class RecipeService {
 
   getRecipe(id: number){
     return this.recipes[id];
+  }
+
+  addRecipe(newRecipe : Recipe){
+    this.recipes.push(newRecipe);
+    this.recipesChanged.next(this.recipes.slice());
+
+  }
+  updateRecipe(index: number, newRecipe : Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number){
+    this.recipes.splice(index,1);
+    this.recipesChanged.next(this.recipes.slice());
   }
 }

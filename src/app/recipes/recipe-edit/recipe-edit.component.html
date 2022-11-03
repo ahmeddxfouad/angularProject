@@ -1,1 +1,60 @@
-<p>recipe-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+      <form [formGroup]="recipeForm" (click)="onSubmit()">
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="name" >Name</label>
+              <input  id="name" type="text" class="form-control" formControlName="name">
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="imagePath" >Image URL</label>
+                <input  id="imagePath" type="text" class="form-control" formControlName="imagePath" #imagePath>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <img [src]="imagePath.value" class="img-responsive" style="height: 500px">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="description" >Description</label>
+                <textarea  id="description" type="text-field" class="form-control" formControlName="description" rows="5"></textarea>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-xs-12" formArrayName="ingredients">
+            <div class="row" *ngFor="let ingCrtl of recipeForm.get('ingredients'); let i = index;"
+                 formGroupName="i">
+
+
+              <div class="col-xs-8">
+                <input type="text" class="form-control" formControlName="name">
+              </div>
+              <div class="col-xs-2">
+                <input type="number" class="form-control" formControlName="amount">
+              </div>
+              <div class="col-xs-2">
+                <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(1)">X</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </form>
+  </div>
+</div>
