@@ -38,10 +38,9 @@
           </div>
         <div class="row">
           <div class="col-xs-12" formArrayName="ingredients">
-            <div class="row" *ngFor="let ingCrtl of recipeForm.get('ingredients'); let i = index;"
-                 formGroupName="i">
-
-
+            <div class="row"
+                 *ngFor="let ingCrtl of recipeForm.controls['ingredients'].value;  let i = index;"
+                 [formGroupName]="i"><!--new Syntax-->
               <div class="col-xs-8">
                 <input type="text" class="form-control" formControlName="name">
               </div>
@@ -52,6 +51,7 @@
                 <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(1)">X</button>
                 </div>
               </div>
+            <br><br>
             </div>
           </div>
 

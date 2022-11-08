@@ -34,11 +34,11 @@ export class RecipeEditComponent implements OnInit {
       )
   }
 
-  getControls(){
+ /* getControls(){
     console.log(  this.recipeForm.get('ingredients')?.value)
-    // @ts-ignore
-    return ( this.recipeForm.get('ingredients').value);
-  }
+
+    return ( this.recipeForm.get('ingredients').controls);
+  }*/
 
   onSubmit(){
     console.log(this.editRecipe);
@@ -57,7 +57,8 @@ export class RecipeEditComponent implements OnInit {
       let recipeName= "";
       let recipeImageUrl = "";
       let recipeDescription ="";
-      let recipeIngredients= new FormArray<FormGroup>([]);
+      // @ts-ignore
+    let recipeIngredients= new FormArray<FormGroup>([]);
 
       if(this.editMode)
       {
@@ -67,7 +68,7 @@ export class RecipeEditComponent implements OnInit {
         recipeDescription = recipe.description;
         if(recipe['ingredients']){
           for( let ingredient of recipe.ingredients) {
-              recipeIngredients.push(
+            recipeIngredients.push(
                 new FormGroup({
                   'name' : new FormControl(ingredient.name, Validators.required),
                   'amount' : new FormControl(ingredient.amount, [
@@ -76,11 +77,13 @@ export class RecipeEditComponent implements OnInit {
                   ])
                 })
               );
+            console.log(recipeIngredients.value);
           }
         }
       }
 
 
+    // @ts-ignore
     this.recipeForm = new FormGroup({
       'name' : new FormControl(recipeName, Validators.required),
       'imagePath' : new FormControl(recipeImageUrl, Validators.required),
